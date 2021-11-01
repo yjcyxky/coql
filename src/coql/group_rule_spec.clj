@@ -1,24 +1,11 @@
 (ns coql.group-rule-spec
   (:require [clojure.spec.alpha :as s]
-            [spec-tools.core :as st]
             [coql.rule-spec :as rs]))
 
 ;; ------------------------------------------ Group Rule ------------------------------------------
-(s/def ::type
-  (st/spec
-   {:spec                #(#{"group"} %)
-    :type                :string
-    :description         "The type of rule, only support group."
-    :swagger/default     "group"
-    :reason              "The type of rule, only support group."}))
+(s/def ::type #{"group"})
 
-(s/def ::operator
-  (st/spec
-   {:spec                #(#{"and" "or"} %)
-    :type                :string
-    :description         "Operator, only support one of #{'and' 'or'}"
-    :swagger/default     "and"
-    :reason              "Operator, only support one of #{'and' 'or'}"}))
+(s/def ::operator #{"and" "or"})
 
 (s/def ::vector-entry
   (s/or :rule rs/rule :group-rule ::group-rule))
